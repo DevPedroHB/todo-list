@@ -1,36 +1,29 @@
-import { useState } from "react";
+import { TaskProps } from "../../App";
 import clipboardImg from "../../assets/clipboard.svg";
-import { Task, TaskProps } from "../Task";
+import { Task } from "../Task";
 import styles from "./styles.module.css";
 
-export function Tasks() {
-  const [tasks, setTasks] = useState<TaskProps[]>([
-    {
-      content:
-        "Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada. Nulla quis lorem ut libero malesuada feugiat.",
-      completed: false,
-    },
-    {
-      content:
-        "Pellentesque in ipsum id orci porta dapibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ultricies ligula sed magna dictum porta.",
-      completed: false,
-    },
-    {
-      content:
-        "Nulla quis lorem ut libero malesuada feugiat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.",
-      completed: false,
-    },
-    {
-      content:
-        "Quisque velit nisi, pretium ut lacinia in, elementum id enim. Donec sollicitudin molestie malesuada. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.",
-      completed: true,
-    },
-    {
-      content:
-        "Vivamus suscipit tortor eget felis porttitor volutpat. Cras ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      completed: true,
-    },
-  ]);
+interface TasksProps {
+  tasks: TaskProps[];
+  setTasks: (tasks: TaskProps[]) => void;
+}
+
+export function Tasks({ tasks, setTasks }: TasksProps) {
+  function handleCompleteTask(id: string) {
+    setTasks(
+      tasks.map((task) => {
+        if (task.id === id) {
+          return { ...task, completed: !task.completed };
+        } else {
+          return { ...task };
+        }
+      })
+    );
+  }
+
+  function handleDelete(id: string) {
+    setTasks(tasks.filter((task) => task.id !== id));
+  }
 
   return (
     <div className={styles.tasks}>
@@ -59,7 +52,14 @@ export function Tasks() {
       )}
       <div className={styles.list}>
         {tasks.map((task) => (
-          <Task content={task.content} completed={task.completed} />
+          <Task
+            key={task.id}
+            id={task.id}
+            content={task.content}
+            completed={task.completed}
+            handleCompleteTask={handleCompleteTask}
+            handleDelete={handleDelete}
+          />
         ))}
       </div>
     </div>
