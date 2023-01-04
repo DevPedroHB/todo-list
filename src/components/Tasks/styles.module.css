@@ -1,0 +1,57 @@
+.tasks {
+  margin-bottom: 1rem;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.info strong {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.info strong:first-child {
+  color: var(--blue);
+}
+
+.info strong:last-child {
+  color: var(--purple);
+}
+
+.info span {
+  background: var(--gray-400);
+  color: var(--gray-200);
+  padding: 0.125rem 0.5rem;
+  border-radius: 50px;
+}
+
+.empty {
+  border-top: 1px solid var(--gray-400);
+  border-radius: 8px;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.empty img {
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+.empty strong,
+p {
+  color: var(--gray-300);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
